@@ -19,11 +19,10 @@ Type-System/
 |── language-spec.md
 │── requirements.txt
 |── environment.yml
-│── __init__.py
-│── ast.py
-│── parser.py
-│── type_checker.py
-│── type_inferencer.py
+│── abstract_syntax_tree.py
+│── parse.py
+│── type-checker.py
+│── type-inferencer.py
 │── main.py
 ```
 
@@ -41,7 +40,7 @@ Type-System/
 To run the example program and see the type checker and inferencer in action, use the following command:
 
 ```
-python -m type_system.main
+python -m Type-System.main
 ```
 
 This will run the example program, perform type checking, and show the inferred types.
