@@ -1,5 +1,5 @@
 import re
-from typing import List, Union
+from typing import List
 from .abstract_syntax_tree import *
 
 class Parser:
