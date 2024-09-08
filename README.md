@@ -21,8 +21,8 @@ Type-System/
 |── environment.yml
 │── abstract_syntax_tree.py
 │── parse.py
-│── type-checker.py
-│── type-inferencer.py
+│── type_checker.py
+│── type_inferencer.py
 │── main.py
 ```
 

@@ -1,6 +1,6 @@
-from .abstract_syntax_tree import *
+from abstract_syntax_tree import *
 
-class TypeError:
+class TypeError(Exception):
     pass
 
 class TypeChecker:
@@ -11,8 +11,9 @@ class TypeChecker:
         for statement in program.statements:
             if isinstance(statement, Declaration):
                 self.check_declaration(statement)
-            else:
+            elif isinstance(statement, Expression):
                 self.check_expression(statement)
+
     def check_declaration(self, declaration: Declaration):
         actual_type = self.check_expression(declaration.value)
         if not self.types_equal(actual_type, declaration.type_annotation):
@@ -54,7 +55,7 @@ class TypeChecker:
             return func_type.return_type
         else:
             raise TypeError(f"Unknown expression type: {type(expr)}")
-        
+
     def types_equal(self, type1: Type, type2: Type) -> bool:
         if type(type1) != type(type2):
             return False

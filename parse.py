@@ -1,6 +1,6 @@
 import re
 from typing import List
-from .abstract_syntax_tree import *
+from abstract_syntax_tree import *
 
 class Parser:
     def __init__(self, text: str):

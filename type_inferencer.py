@@ -1,4 +1,4 @@
-from .abstract_syntax_tree import *
+from abstract_syntax_tree import *
 from typing import Dict
 
 class TypeVariable:
