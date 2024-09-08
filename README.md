@@ -15,15 +15,16 @@ Type System is a simple implementation of a type system in Python, designed to h
 ```
 Type-System/
 │
-├── type_system/
-│   ├── __init__.py
-│   ├── ast.py
-│   ├── parser.py
-│   ├── type_checker.py
-│   ├── type_inferencer.py
-│   └── main.py
-│
-└── README.md
+│── README.md
+|── language-spec.md
+│── requirements.txt
+|── environment.yml
+│── __init__.py
+│── ast.py
+│── parser.py
+│── type_checker.py
+│── type_inferencer.py
+│── main.py
 ```
 
 ## Setup
