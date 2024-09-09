@@ -1,11 +1,12 @@
 from parse import Parser
+from abstract_syntax_tree import Program, Declaration, Expression
 from type_checker import TypeChecker
 from type_inferencer import TypeInferencer
 
 def main():
     program = """
     let x: Int = 5
-    let y = 10
+    let y: Int = 10
     let add: (Int, Int) -> Int = (a, b) -> a + b
     let result = add(x, y)
     let is_positive = (n) -> n > 0
@@ -13,7 +14,7 @@ def main():
     """
 
     parser = Parser(program)
-    ast = parser.parse_program
+    ast = parser.parse_program()
 
     type_checker = TypeChecker()
     try:

@@ -36,7 +36,7 @@ class TypeInferencer:
                 new_type = TypeVariable()
                 self.type_env[expr.name] = new_type
                 return new_type
-        elif isinstance(expr, BinaryOperation):
+        elif isinstance(expr, BinaryOp):
             left_type = self.infer_expression(expr.left)
             right_type = self.infer_expression(expr.right)
             if expr.operator in ['+', '-', '*', '/']:
@@ -52,8 +52,19 @@ class TypeInferencer:
             return_type = TypeVariable()
             self.unify_types(func_type, FunctionType(arg_types, return_type))
             return return_type
-        raise TypeError(f"Cannot infer type for expression: {expr}")
-    
+        elif isinstance(expr, LambdaFunction):
+            param_types = [TypeVariable() for _ in expr.parameters]
+            lambda_env = self.type_env.copy()
+            for param, param_type in zip(expr.parameters, param_types):
+                lambda_env[param] = param_type
+            
+            old_env = self.type_env
+            self.type_env = lambda_env
+            body_type = self.infer_expression(expr.body)
+            self.type_env = old_env
+            
+            return FunctionType(param_types, body_type)
+
     def unify_types(self, type1: Type, type2: Type):
         if isinstance(type1, TypeVariable):
             if type1.instance is None:
@@ -70,11 +81,11 @@ class TypeInferencer:
             self.unify_types(type1.return_type, type2.return_type)
         elif type(type1) != type(type2):
             raise TypeError(f"Type mismatch: {type1} and {type2}")
-        
+
     def unify(self):
         for name, type_var in self.type_env.items():
             self.type_env[name] = self.resolve_type(type_var)
-            
+
     def resolve_type(self, type_: Type) -> Type:
         if isinstance(type_, TypeVariable):
             if type_.instance is None:

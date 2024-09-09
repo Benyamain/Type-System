@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Union
+from typing import List, Union, Optional
 
 @dataclass
 class Type:
@@ -15,7 +15,7 @@ class BoolType(Type):
 
 @dataclass
 class FunctionType(Type):
-    param_list: List[Type]
+    param_types: List[Type]
     return_type: Type
 
 @dataclass
@@ -35,7 +35,7 @@ class Variable(Expression):
     name: str
 
 @dataclass
-class BinaryOperation(Expression):
+class BinaryOp(Expression):
     left: Expression
     operator: str
     right: Expression
@@ -48,9 +48,14 @@ class FunctionCall(Expression):
 @dataclass
 class Declaration:
     name: str
-    type_annotation: Type
+    type_annotation: Optional[Type]
     value: Expression
 
 @dataclass
 class Program:
     statements: List[Union[Expression, Declaration]]
+
+@dataclass
+class LambdaFunction(Expression):
+    parameters: List[str]
+    body: Expression
